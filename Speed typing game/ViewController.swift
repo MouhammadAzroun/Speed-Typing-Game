@@ -16,12 +16,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func startGameButton(_ sender: UIButton) {
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "game_VC") as? GameViewController else{
-            return
-        }
-        vc.modalPresentationStyle = .fullScreen
-        vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true)
+        performSegue(withIdentifier: "difficulty", sender: nil)
     }
     
 }
