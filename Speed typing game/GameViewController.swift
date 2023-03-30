@@ -13,16 +13,17 @@ class GameViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var userInputTF: UITextField!
-    var fiveSec = 5
+    var time = Difficulty.difficulties.dataToPass
     var score = 0
-    var wordList : [String] = []
     var listPosition = 0
     var timer : Timer?
+    var wordList: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addWords()
+        wordList = addWords()
+        
         wordLabel.text = wordList[listPosition]
         
         userInputTF.delegate = self
@@ -31,6 +32,7 @@ class GameViewController: UIViewController, UITextFieldDelegate {
         if defaults.object(forKey: "key") == nil{
             saveUserDefault(highScore: 0)
         }
+    
 
 
         
@@ -42,28 +44,20 @@ class GameViewController: UIViewController, UITextFieldDelegate {
     }
     
     func countDown(){
-        timerLabel.text = ":0\(fiveSec)"
-        fiveSec -= 1
-        
-        if fiveSec == -1 {
-            fiveSec = 5
-            score -= 1
-            scoreLabel.text = "Score: \(score)"
-            wordValue()
-        }
+            timerLabel.text = ":0\(time)"
+            time -= 1
+            
+            if time == -1 {
+                time = Difficulty.difficulties.dataToPass
+                score -= 1
+                scoreLabel.text = "Score: \(score)"
+                wordValue()
+            }
     }
     
-    func addWords(){
-        wordList.append("car")
-        wordList.append("bus")
-        wordList.append("plane")
-        wordList.append("apple")
-        wordList.append("laptop")
-        wordList.append("phone")
-        wordList.append("boat")
-        wordList.append("screen")
-        wordList.append("table")
-        wordList.append("food")
+    func addWords() -> [String]{
+        let list: [String] = ["car","bus","pity","begin","integration","feeling","state","steel","freedom","costume","researcher","exhibition","sticky","player","legend","literacy","imperial","context","contraction","garlic","ambition","dose","plug","visit","cross","pawn","barrel","model","take","salad"]
+        return list
     }
     
     func wordValue(){
@@ -104,7 +98,7 @@ class GameViewController: UIViewController, UITextFieldDelegate {
             userInputTF.text = ""
         }
         wordValue()
-        fiveSec = 5
+        time = Difficulty.difficulties.dataToPass
         countDown()
             return true
         }
