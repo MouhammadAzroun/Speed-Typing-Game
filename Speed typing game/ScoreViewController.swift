@@ -9,6 +9,7 @@ import UIKit
 
 class ScoreViewController: UIViewController {
     
+    // in the score view controller we retreive the score and high score from game view controller and show it to the user.
     let score = Score.sharedScore.dataToPass
     let highScore = HighScore.sharedHighScore.dataToPass
     

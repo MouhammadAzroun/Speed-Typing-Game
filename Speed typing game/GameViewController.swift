@@ -43,6 +43,7 @@ class GameViewController: UIViewController, UITextFieldDelegate {
                 
     }
     
+    // Count down function in order to show a count down to the user based on the difficulty the choose on the Difficulty view controller.
     func countDown(){
             timerLabel.text = ":0\(time)"
             time -= 1
@@ -50,6 +51,7 @@ class GameViewController: UIViewController, UITextFieldDelegate {
             if time == -1 {
                 time = Difficulty.difficulties.dataToPass
                 score -= 1
+                userInputTF.text = ""
                 scoreLabel.text = "Score: \(score)"
                 wordValue()
             }
@@ -60,6 +62,7 @@ class GameViewController: UIViewController, UITextFieldDelegate {
         return list
     }
     
+    // a function that go through eatch word in the array and move to the score view controller when finished.
     func wordValue(){
         listPosition += 1
         
@@ -82,10 +85,12 @@ class GameViewController: UIViewController, UITextFieldDelegate {
             vc.modalPresentationStyle = .fullScreen
             vc.modalTransitionStyle = .coverVertical
             present(vc, animated: true)
+            
+            // we call after invalidate funcion in order to stop the Timer after we have moved to the score View Controller.
             timer?.invalidate()
         }
     }
-    
+    // a function that gets exucted after the user presses return key on keyboard.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let userInput : String = String(userInputTF.text!)
         if userInput == wordLabel.text {
@@ -117,6 +122,7 @@ class GameViewController: UIViewController, UITextFieldDelegate {
     
 }
 
+// these two classes to pass the current score and the highest score value to the score view controller.
 class Score {
     static let sharedScore = Score()
     var dataToPass: Int = 0

@@ -14,6 +14,8 @@ class DifficultiyViewController: UIViewController {
         super.viewDidLoad()
         
     }
+    
+    // in this view controller we pass how many seconds the player has based on the difficulty they choose.
 
     @IBAction func easyButton(_ sender: UIButton) {
         let easy: Int = 5
@@ -22,13 +24,13 @@ class DifficultiyViewController: UIViewController {
     }
     
     @IBAction func normalButton(_ sender: UIButton) {
-        let normal: Int = 4
+        let normal: Int = 3
         Difficulty.difficulties.dataToPass = normal
         performSegue(withIdentifier: "normal", sender: nil)
     }
     
     @IBAction func hardButton(_ sender: UIButton) {
-        let hard: Int = 3
+        let hard: Int = 2
         Difficulty.difficulties.dataToPass = hard
         performSegue(withIdentifier: "hard", sender: nil)
     }
